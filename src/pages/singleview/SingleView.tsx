@@ -53,7 +53,7 @@ export default function SingleView() {
                     info.data.attributes.startDate));
             }
             if(((response.response && response.response.status) || response.status) > 400 && info && info.data) {
-                if(response.status === 401) {
+                if(response.status === 401 || response.response.status === 401) {
                     localStorage.clear();
                     setSession(null);
                 }
@@ -75,6 +75,7 @@ export default function SingleView() {
             }
         }
     }, [info, response]);
+
     return (
         <SingleViewPageStyle>
             {media ? (

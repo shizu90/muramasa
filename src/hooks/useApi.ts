@@ -31,7 +31,9 @@ export default function useApi(token?: string) {
     }
 
     function getUser(id: string) {
-        axiosInstance.get(`${url}/users/${id}`);
+        axiosInstance.get(`${url}/users/${id}`)
+        .then(res => setResponse(JSON.parse(JSON.stringify(res))))
+        .catch(err => setResponse(err.response.data));
     }
 
     function updateUser(id: string, data: object, token: string) {

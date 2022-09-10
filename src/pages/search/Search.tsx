@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../components/input/Input";
 import Select from "../../components/selectbox/Select";
 import useKitsu from "../../hooks/useKitsu";
@@ -8,23 +8,32 @@ import MediaList from "../../components/mediaList/MediaList";
 import Pagination from "../../components/pagination/Pagination";
 import { TailSpin } from "react-loader-spinner";
 import theme from "../../styles/theme";
+import { useLocation, useNavigate } from "react-router";
+import useCapitalize from "../../hooks/useCapitalize";
+import Button from "../../components/button/Button";
 
 export default function SearchPage() {
-
+    const { search } = useLocation();
+    const { capitalize } = useCapitalize();
+    const searchParams = new URLSearchParams(search);
+    const [text, setText] = useState<string | null>(searchParams.get("text") ? searchParams.get("text") : "");
+    const [type, setType] = useState<string | null>(searchParams.get("type") || "Anime");
+    const navigate = useNavigate();
     const {
-        type, setType, 
-        text, setText, 
         info, setInfo, 
-        offset, setOffset, 
         LIMIT, url
     } = useKitsu()
+
+    const handlePageChange = (index: number) => {
+        navigate(`/search?text=${text}&type=${type?.toLowerCase()}&offset=${index}`);
+    }
 
     useEffect(() => {
         setInfo({data: null, meta: null})
         const query: {[k: string]: any} = {
             page: {
                 limit: LIMIT,
-                offset: offset
+                offset: searchParams.get("offset")
             }
         }
         if (text) {
@@ -32,16 +41,17 @@ export default function SearchPage() {
                 text: text
             }
         }
-        fetch(`${url}/${type.toLowerCase()}?${qs.stringify(query)}`)
+        fetch(`${url}/${type?.toLowerCase()}?${qs.stringify(query)}`)
         .then(res => res.json())
         .then(res => setInfo(res))    
-    }, [text, type, offset])
+    }, [search, searchParams.get("offset")])
 
     return (
         <SearchPageStyle>
             <SearchHandler>
-                <Input value={text} onChange={setText} debounce={true} placeholder={"Type a media..."} size={400}/>
-                <Select values={["Anime", "Manga"]} onChange={setType} value={type}/>
+                <Input value={text || ""} onChange={setText} debounce={false} placeholder={"Type a media..."} size={400}/>
+                <Select values={["Anime", "Manga"]} onChange={setType} value={capitalize(type || "anime")}/>
+                <Button label="Search" onClick={() => navigate(`/search?text=${text}&type=${type?.toLowerCase()}&offset=0`)} noBg={true}/>
             </SearchHandler>
             <SearchResult>
                 {info.data ? (
@@ -52,7 +62,7 @@ export default function SearchPage() {
                 
             </SearchResult>
             {info.data && (
-                <Pagination limit={LIMIT} total={info.meta.count} offset={offset} setOffset={setOffset}/>    
+                <Pagination limit={LIMIT} total={info.meta.count} offset={parseInt(searchParams.get("offset") || "0") || 0} setOffset={handlePageChange}/>    
             )}
         </SearchPageStyle>
     )

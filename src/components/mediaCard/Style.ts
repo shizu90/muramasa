@@ -9,8 +9,8 @@ export const MediaCardContainer = styled.div`
     }
 
     img {
-        width: 15%;
-        height: 15%;
+        width: 26%;
+        height: 26%;
         border-radius: 5px;
         @media (max-width: 999px) {
             width: 50%;
@@ -19,9 +19,9 @@ export const MediaCardContainer = styled.div`
 
     div.infoContainer {
         margin-left: 15px;
-        width: 35%;
+        width: 500px;
         @media (max-width: 999px) {
-            width: 65%;
+            width: 300px;
             text-align: center;
         }
         h1 {

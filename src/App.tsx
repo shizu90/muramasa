@@ -9,6 +9,7 @@ import SearchPage from './pages/search/Search';
 import SeasonsPage from './pages/seasons/Seasons';
 import CommunityPage from './pages/community/Community';
 import SingleView from './pages/singleview/SingleView';
+import ProfilePage from './pages/profile/Profile';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/community" element={<CommunityPage/>}></Route>
           <Route path="/anime/:id" element={<SingleView/>}></Route>
           <Route path="/manga/:id" element={<SingleView/>}></Route>
+          <Route path="/profile/:id" element={<ProfilePage/>}></Route>
         </Routes>
         <Footer></Footer>
       </div>

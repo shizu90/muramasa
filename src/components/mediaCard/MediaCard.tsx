@@ -54,7 +54,7 @@ export default function MediaCard(props: MediaCardProps) {
 
     return (
         <MediaCardContainer>
-            <img src={props.media.imgSource} draggable={false}></img>
+            <img src={props.media.imgSource || "/no-image.png"} draggable={false}></img>
             <div className="infoContainer">
                 <h1>{props.media.title}</h1>
                 <h2>{props.media.averageRating === null ? "N/A" : (props.media.averageRating/10).toFixed(2)}</h2>

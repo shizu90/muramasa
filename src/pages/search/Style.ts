@@ -29,6 +29,9 @@ export const SearchHandler = styled.div`
             margin-bottom: 10px;
         }
     }
+    input[type=button] {
+        margin-left: 10px;
+    }
 `
 
 export const SearchResult = styled.div`

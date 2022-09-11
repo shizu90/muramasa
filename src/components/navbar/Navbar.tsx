@@ -60,7 +60,6 @@ export default function Navbar(props: NavbarProps) {
             <ul className="navbarMenu">
                 <li><Link to="/">Search</Link></li>
                 <li><Link to="/seasons">Seasons</Link></li>
-                <li><Link to="/community">Community</Link></li>
                 {logged ? (
                     <>
                         <li>

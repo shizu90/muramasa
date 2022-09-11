@@ -14,7 +14,7 @@ export default function FavoritesContainer(props: FavoritesContainer) {
                 {props.userFavorites.anime.length > 0 ? (
                     <ul>
                         {props.userFavorites.anime.map((item: any) => item !== null && (
-                            <Link to={`/${item.type.toLowerCase()}/${item.id}`}>
+                            <Link to={`/${item.type.toLowerCase()}/${item.id}`} key={item.id}>
                                 <li key={item.id}>
                                     <img src={item.imgSource || "/no-image.png"} draggable={false}></img>
                                 </li>
@@ -31,7 +31,7 @@ export default function FavoritesContainer(props: FavoritesContainer) {
                 {props.userFavorites.manga.length > 0 ? (
                     <ul>
                         {props.userFavorites.manga.map((item: any) => item !== null && (
-                            <Link to={`/${item.type.toLowerCase()}/${item.id}`}>
+                            <Link to={`/${item.type.toLowerCase()}/${item.id}`} key={item.id}>
                                 <li key={item.id}>
                                     <img src={item.imgSource || "/no-image.png"} draggable={false}></img>
                                 </li>

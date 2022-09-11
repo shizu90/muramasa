@@ -6,8 +6,10 @@ export const ProfilePageStyle = styled.section`
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 20%;
-
+    padding-top: 10%;
+    @media (max-width: 999px) {
+        padding-top: 25%;
+    }
     hr {
         margin-top: 10px;
         margin-bottom: 10px;
@@ -15,12 +17,15 @@ export const ProfilePageStyle = styled.section`
 `
 
 export const ProfileHeader = styled.div`
-    margin-top: 50px;
     img {
         width: 135px;
         height: 135px;
         object-fit: cover;
         border-radius: 100%;
+        @media (max-width: 999px) {
+            width: 100px;
+            height: 100px;
+        }
     }
 
     h1 {
@@ -51,9 +56,15 @@ export const ProfileHeader = styled.div`
         }
         li:last-child {
             margin-right: 5rem;
+            @media (max-width: 999px) {
+                margin-right: 5px;
+            }
         }
         li:first-child {
             margin-left: 5rem;
+            @media (max-width: 999px) {
+                margin-left: 5px;
+            }
         }
     }
     input {

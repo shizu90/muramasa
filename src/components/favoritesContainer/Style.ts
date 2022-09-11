@@ -23,6 +23,10 @@ export const FavoritesContainerStyle = styled.div`
                     width: 140px;
                     height: 200px;
                     border-radius: 6px;
+                    @media (max-width: 999px) {
+                        width: 70px;
+                        height: 100px;
+                    }
                 }
             }
 

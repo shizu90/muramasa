@@ -22,6 +22,7 @@ export default function LoginPage() {
             if(response.data) {
                 localStorage.setItem("authKey", JSON.stringify({token: response.data, id: ""}));
                 context?.setAuth({token: response.data, id: ""});
+                navigate("/");
             }
         }
     }, [response])

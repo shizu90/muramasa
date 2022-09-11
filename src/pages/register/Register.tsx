@@ -1,11 +1,13 @@
 import Form from "../../components/form/Form";
 import { RegisterPageStyle } from "./Style";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi";
 import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 export default function RegisterPage() {
     const {register, response} = useApi();
+    const navigate = useNavigate();
 
     const onSubmit = (event: any, obj: any) => {
         if(!obj["username"].match("^.{1,24}$") || !obj["email"].match("[a-z0-9]+@[a-z]+\.[a-z]{2,3}") || obj["password"] !== obj["confirmPassword"] || !obj["password"].match("^.{6,24}$")) {
@@ -13,12 +15,13 @@ export default function RegisterPage() {
         }else {
             event.preventDefault();
             register(obj);
+            toast.success("Successfully registered.");
         }
     }
 
     useEffect(() => {
         if(response && response.status >= 200 && response.status <= 300) {
-            window.location.reload();
+            navigate("/login");
         }
     }, [response])
 

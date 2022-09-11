@@ -10,11 +10,16 @@ import SeasonsPage from './pages/seasons/Seasons';
 import CommunityPage from './pages/community/Community';
 import SingleView from './pages/singleview/SingleView';
 import ProfilePage from './pages/profile/Profile';
+import ErrorPage from './pages/errorPage/ErrorPage';
+import SettingsPage from './pages/settings/Settings';
+import { Toaster } from 'react-hot-toast';
+import theme from './styles/theme';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Toaster toastOptions={{className: "toaster", success: {iconTheme: {primary: theme.colors.primary, secondary: theme.colors.text}}}}/>
         <Navbar></Navbar>
         <Routes>
           <Route path="/" element={<Home/>}></Route>
@@ -26,6 +31,8 @@ function App() {
           <Route path="/anime/:id" element={<SingleView/>}></Route>
           <Route path="/manga/:id" element={<SingleView/>}></Route>
           <Route path="/profile/:id" element={<ProfilePage/>}></Route>
+          <Route path="/settings/:id" element={<SettingsPage/>}></Route>
+          <Route path="*" element={<ErrorPage/>}></Route>
         </Routes>
         <Footer></Footer>
       </div>

@@ -7,11 +7,12 @@ import useKitsu from "../../hooks/useKitsu";
 import { SingleViewPageStyle } from "./Style";
 import { TailSpin } from "react-loader-spinner";
 import theme from "../../styles/theme";
+import { useNavigate } from "react-router";
 
 export default function SingleView() {
     const type = window.location.href.split("/")[3];
     const id = parseInt(window.location.href.split("/")[4]);
-
+    const navigate = useNavigate();
     const context = useContext(AuthContext);
     const [media, setMedia] = useState<any>();
     const [session, setSession] = useState<any>();
@@ -73,6 +74,10 @@ export default function SingleView() {
                     info.data.attributes.startDate
                 ))
             }
+        }
+
+        if(info && info.errors && info.errors[0].status === "404") {
+            navigate("/404");
         }
     }, [info, response]);
 

@@ -116,6 +116,21 @@ export default function useApi(token?: string) {
             .catch(err => setResponse(err));
        }
     }
+
+    function uploadImage(file: any, token: string) {
+        if(token !== undefined) {
+            const formData = new FormData();
+            formData.append("file", file);
+            axios.post(`${url}/upload`, formData, {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    "Authorization": token
+                }
+            })
+            .then(res => setResponse(JSON.parse(JSON.stringify(res))))
+            .catch(err => console.log(err));
+        }
+    }
     
     return {
         response,
@@ -130,6 +145,7 @@ export default function useApi(token?: string) {
         validateToken,
         getUser,
         getAllUsers,
-        getMediaFromList
+        getMediaFromList,
+        uploadImage
     }
 }

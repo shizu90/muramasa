@@ -22,10 +22,9 @@ function App() {
         <Toaster toastOptions={{className: "toaster", success: {iconTheme: {primary: theme.colors.primary, secondary: theme.colors.text}}}}/>
         <Navbar></Navbar>
         <Routes>
-          <Route path="/" element={<Home/>}></Route>
+          <Route path="/" element={<SearchPage/>}></Route>
           <Route path="/login" element={<LoginPage/>}></Route>
           <Route path="/register" element={<RegisterPage/>}></Route>
-          <Route path="/search" element={<SearchPage/>}></Route>
           <Route path="/seasons" element={<SeasonsPage/>}></Route>
           <Route path="/community" element={<CommunityPage/>}></Route>
           <Route path="/anime/:id" element={<SingleView/>}></Route>

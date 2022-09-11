@@ -58,7 +58,7 @@ export default function Navbar(props: NavbarProps) {
                 </svg>
             </div>
             <ul className="navbarMenu">
-                <li><Link to="/search">Search</Link></li>
+                <li><Link to="/">Search</Link></li>
                 <li><Link to="/seasons">Seasons</Link></li>
                 <li><Link to="/community">Community</Link></li>
                 {logged ? (

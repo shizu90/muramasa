@@ -31,6 +31,10 @@ export const SearchHandler = styled.div`
     }
     input[type=button] {
         margin-left: 10px;
+        @media (max-width: 999px) {
+            margin-left: 0;
+            margin-top: 10px;
+        }
     }
 `
 

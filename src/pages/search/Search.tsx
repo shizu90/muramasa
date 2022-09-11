@@ -25,7 +25,7 @@ export default function SearchPage() {
     } = useKitsu()
 
     const handlePageChange = (index: number) => {
-        navigate(`/search?text=${text}&type=${type?.toLowerCase()}&offset=${index}`);
+        navigate(`?text=${text}&type=${type?.toLowerCase()}&offset=${index}`);
     }
 
     useEffect(() => {
@@ -51,10 +51,10 @@ export default function SearchPage() {
             <SearchHandler>
                 <Input value={text || ""} onChange={setText} debounce={false} placeholder={"Type a media..."} size={400}/>
                 <Select values={["Anime", "Manga"]} onChange={setType} value={capitalize(type || "anime")}/>
-                <Button label="Search" onClick={() => navigate(`/search?text=${text}&type=${type?.toLowerCase()}&offset=0`)} noBg={true}/>
+                <Button label="Search" onClick={() => navigate(`?text=${text}&type=${type?.toLowerCase()}&offset=0`)} noBg={true}/>
             </SearchHandler>
             <SearchResult>
-                {info.data ? (
+                {info && info.data ? (
                     <MediaList apiResponse={info}/> 
                 ) : (
                     <TailSpin height={"80"} width={"80"} wrapperClass={"loading"} color={theme.colors.primary}/>

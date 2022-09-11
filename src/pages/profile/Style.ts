@@ -6,7 +6,7 @@ export const ProfilePageStyle = styled.section`
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 10%;
+    padding-top: 5%;
     @media (max-width: 999px) {
         padding-top: 25%;
     }

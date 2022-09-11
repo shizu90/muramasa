@@ -15,7 +15,7 @@ export default function MediaList(props: MediaListProps){
                     (
                     <Link to={`/${item.type}/${item.id}`} key={item.id}>
                         <li key={item.id}>
-                            <img src={item.attributes.posterImage.large ? item.attributes.posterImage.large : '/no-image.png'}/>
+                            <img src={item.attributes.posterImage ? item.attributes.posterImage.large : '/no-image.png'}/>
                             <p>{item.attributes.canonicalTitle}</p>
                         </li>
                     </Link>

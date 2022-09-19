@@ -17,4 +17,7 @@ export const LoginPageStyle = styled.section`
         color: inherit;
         margin-top: 1%;
     }
+    p.errorMessage {
+        color: ${props => props.theme.colors.primary};
+    }
 `

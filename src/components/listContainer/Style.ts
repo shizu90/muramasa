@@ -1,25 +1,27 @@
 import styled from "styled-components";
 
+interface MediaTypeProps {
+    selected: boolean
+}
+
 export const ListContainerStyle = styled.div`
-width: inherit;
+    width: inherit;
+    border: 1px solid ${props => props.theme.colors.accent};
+    border-radius: 5px;
     ul {
         list-style: none;
     }
     ul:first-child{
         display: flex;
         justify-content: center;
-        border: 1px solid ${props => props.theme.colors.accent};
         padding: 10px;
         padding-top: 15px;
-        padding-bottom: 15px;
-        border-radius: 5px;
+        margin-bottom: 15px;
         li {
             margin-right: 15px;
             cursor: pointer;
             transition: 100ms ease-out;
-            &:hover {
-                color: ${props => props.theme.colors.primary};
-            }
+            padding: 5px;
         }
         li:first-child {
             margin-left: 10px;
@@ -48,21 +50,34 @@ width: inherit;
     }
 `
 
+export const MediaType = styled.li<MediaTypeProps>`
+    background-color: ${props => props.selected ? props.theme.colors.primary : "transparent"};
+    &:hover {
+        background-color: ${props => props.theme.colors.primary};
+    }
+`
+
 export const MediaGrid = styled.ul`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     list-style: none;
     grid-gap: 1.5em;
     margin-top: 5%;
     text-align: center;
+    padding: 10px;
     a {
         text-decoration: none;
     }
 
     li {
-        cursor: pointer;
-        &:hover>p{
-            color: ${props => props.theme.colors.primary};
+        a {
+            cursor: pointer;
+            &:hover>p{
+                color: ${props => props.theme.colors.primary};
+            }
+        }
+        span.mediaLength {
+            margin: 5px;
         }
     }
 

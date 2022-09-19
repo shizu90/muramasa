@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
+import { Session } from "../../context/@types/AuthType";
 import useApi from "../../hooks/useApi";
 import Button from "../button/Button";
 import FormField from "../formfield/FormField";
 import { SettingsContainerStyle } from "./Style";
 
 interface SettingsContainerProps {
-    session: any
+    session: Session
 }
 
 interface SendDataObjectInterface {
@@ -23,7 +24,7 @@ export default function SettingsContainer(props: SettingsContainerProps) {
     const [propic, setPropic] = useState<any>();
     const [file, setFile] = useState<any>();
     const navigate = useNavigate();
-    const { getUser, uploadImage, updateUser, response } = useApi();
+    const { getUser, uploadImage, updateUser, deleteUser, response } = useApi();
 
     const handleSave = () => {
         const obj: SendDataObjectInterface = {
@@ -36,8 +37,9 @@ export default function SettingsContainer(props: SettingsContainerProps) {
         navigate(`/profile/${props.session.id}`)
     }
 
-    const handleDelete = (event: any) => {
-
+    const handleDelete = () => {
+        deleteUser(user.id, props.session.token);
+        navigate("/");
     }
 
     const handleUpload = (event: any) => {
@@ -55,7 +57,7 @@ export default function SettingsContainer(props: SettingsContainerProps) {
             getUser(props.session.id);
         }
     }, [props.session])
-
+    
     useEffect(() => {
         if(response) {
             setUser(response.data);
@@ -67,7 +69,7 @@ export default function SettingsContainer(props: SettingsContainerProps) {
 
     return (
         <SettingsContainerStyle>
-            {props.session.token != "" && props.session.token != "" && user ? (
+            {props.session.token !== "" && props.session.token !== "" && user ? (
                 <>
                     <div>
                         <div className="formSection">
@@ -85,7 +87,7 @@ export default function SettingsContainer(props: SettingsContainerProps) {
                     </div>
                     <div>
                         <Button label={"Save"} onClick={() => handleSave()}/>
-                        <Button label={"Delete account"} noBg={true}/>
+                        <Button label={"Delete account"} onClick={() => handleDelete()} noBg={true}/>
                     </div>
                 </>
             ) : (

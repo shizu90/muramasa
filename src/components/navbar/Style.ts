@@ -50,13 +50,6 @@ export const NavbarContainer = styled.div`
             a {
                 display: flex;
             }
-            svg {
-                height: 30px;
-                width: 30px;
-                border-radius: 100%;
-                margin-left: 10px;
-            }
-
         }
 
         li svg {

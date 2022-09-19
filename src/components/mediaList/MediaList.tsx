@@ -1,11 +1,12 @@
 import { MediaGrid } from "./Style";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
 interface MediaListProps {
     apiResponse: {data?: any, meta?: any}
 }
 
-export default function MediaList(props: MediaListProps){
+function MediaList(props: MediaListProps){
     return (
         <MediaGrid>
             {props.apiResponse.data.length === 0 ? (
@@ -15,7 +16,7 @@ export default function MediaList(props: MediaListProps){
                     (
                     <Link to={`/${item.type}/${item.id}`} key={item.id}>
                         <li key={item.id}>
-                            <img src={item.attributes.posterImage ? item.attributes.posterImage.large : '/no-image.png'}/>
+                            <img src={item.attributes.posterImage ? item.attributes.posterImage.large : '/no-image.png'} alt=""/>
                             <p>{item.attributes.canonicalTitle}</p>
                         </li>
                     </Link>
@@ -25,3 +26,5 @@ export default function MediaList(props: MediaListProps){
         </MediaGrid>
     )
 }
+
+export default memo(MediaList);

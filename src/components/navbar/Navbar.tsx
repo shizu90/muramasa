@@ -6,11 +6,7 @@ import { Link } from "react-router-dom";
 import useApi from "../../hooks/useApi";
 import { AuthContext } from "../../context/AuthContext";
 
-interface NavbarProps {
-
-}
-
-export default function Navbar(props: NavbarProps) {
+export default function Navbar() {
     const [showMenu, setShowMenu] = useState<boolean>(false);
     const [logged, setLogged] = useState<boolean>(false);
     const [id, setId] = useState<string>("");
@@ -24,8 +20,8 @@ export default function Navbar(props: NavbarProps) {
     }
     useEffect(() => {
         validateToken(JSON.parse(localStorage.getItem("authKey") || JSON.stringify({token: "", id: ""})).token);
-    }, [context?.auth])
-
+    }, [context, context?.auth])
+    
     useEffect(() => {
         if(response && response.status < 400) {
             const token = JSON.parse(localStorage.getItem("authKey") || JSON.stringify({token: "", id: ""})).token;
@@ -40,7 +36,7 @@ export default function Navbar(props: NavbarProps) {
                 setLogged(false);
             }
         }
-    }, [response])
+    }, [context, response])
     
     const handleLogout = () => {
         localStorage.clear();
@@ -63,10 +59,9 @@ export default function Navbar(props: NavbarProps) {
                 {logged ? (
                     <>
                         <li>
-                            <Link to={`/profile/${id}`}>Profile</Link>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-person-fill" viewBox="0 0 16 16">
-                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                            </svg>
+                            <Link to={`/profile/${id}`}>
+                                Profile
+                            </Link>
                         </li>
                         <li>
                             <Link to={`/settings/${id}`}>

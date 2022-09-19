@@ -2,11 +2,11 @@ import Form from "../../components/form/Form";
 import { LoginPageStyle } from "./Style";
 import { Link, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function LoginPage() {
-    const {login, validateToken, response} = useApi();
+    const {login, response} = useApi();
     const context = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -34,6 +34,10 @@ export default function LoginPage() {
                 onSubmit={handleSubmit}
                 buttonLabel={"Log in"}
                 errMsgs={["", ""]}/>
+            {response && response.status > 400 && (
+                <p className="errorMessage">{response.message}</p>
+            )
+            }
             <Link to="/register">
                 <p>Don't have an account? Sign up here</p>
             </Link>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+
 const url = "https://muramasa-api.herokuapp.com";
 
 export default function useApi(token?: string) {

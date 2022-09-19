@@ -1,4 +1,9 @@
+export interface Session {
+    token: string,
+    id: string
+}
+
 export default interface AuthType {
-    auth: {token: "", id: ""},
+    auth: Session,
     setAuth: (...params: any) => void
 }
